@@ -1,0 +1,74 @@
+body {
+  background-color: pink;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+form {
+  display: inline-block;
+}
+
+label, input {
+  display: block;
+}
+
+input, button {
+  margin-bottom: 20px;
+}
+
+.invisible {
+  display: none !important;
+}
+
+#board {
+  color: yellow;
+  font-size: 50px;
+  display: grid;
+  grid-template-rows: repeat(3, 100px);
+  grid-template-columns: repeat(3, 100px);
+  row-gap: 5px;
+  column-gap: 5px;
+  width: 300px;
+  margin: auto;
+}
+
+.board-position {
+  background-color: purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty:hover {
+  cursor: pointer;
+}
+
+#names-and-number-of-wins {
+  display: grid;
+  grid-template-rows: repeat(2, 50px);
+  grid-template-columns: repeat(2, 100px);
+  width: 200px;
+  margin: auto;
+}
+
+.name .number-of-wins {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.current-player {
+  color: yellow;
+}
+
+#result-and-play-again {
+  background-color: yellow;
+  width: 300px;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+footer {
+  text-align: right;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>ticTacToe</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link  rel="stylesheet" href="css/styles.css">
+  </head>
+  
+  <body>
+    <h1>ticTacToe</h1>
+
+    <div id="container">
+      <form id="start-form">
+        <label for="player1">Player 1 name:</label>
+        <input type="text" name="player1" id="player1-name" required>
+
+        <label for="player2">Player 2 name:</label>
+        <input type="text" name="player2" id="player2-name" required>
+
+        <button type="button" id="start">Start!</button>
+      </form>
+
+      <div id="result-and-play-again" class="invisible">
+        <h2 id="result"></h2>
+        <p>Do you want to play again?</p>
+        <button type="button" id="play-again">Play again!</button>
+      </div>
+
+      <div id="board" class="invisible">
+        <div id="0" class="board-position"></div>
+        <div id="1" class="board-position"></div>
+        <div id="2" class="board-position"></div>
+        <div id="3" class="board-position"></div>
+        <div id="4" class="board-position"></div>
+        <div id="5" class="board-position"></div>
+        <div id="6" class="board-position"></div>
+        <div id="7" class="board-position"></div>
+        <div id="8" class="board-position"></div>
+      </div>
+
+      <div id="names-and-number-of-wins" class="invisible">
+        <div id="player1-name-and-marker" class="name"></div>
+        <div id="player2-name-and-marker" class="name"></div>
+        <div id="player1-number-of-wins" class="number-of-wins"></div>
+        <div id="player2-number-of-wins" class="number-of-wins"></div>
+      </div>
+
+      <footer>Developed by <a href="https://github.com/AlbertoPdRF">Alberto Pérez de Rada Fiol</a></footer>
+    </div>
+
+    <script src="src/main.js"></script>
+  </body>
+</html>
