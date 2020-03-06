@@ -12,8 +12,6 @@ const playerFactory = (name, marker, currentPlayerStatus) => {
   const getMarker = () => marker;
   const setCurrentPlayerStatus = (currentPlayerStatus) => _currentPlayerStatus = currentPlayerStatus;
   const getCurrentPlayerStatus = () => _currentPlayerStatus;
-  const setCurrentWinnerStatus = (currentWinnerStatus) => _currentWinnerStatus = currentWinnerStatus;
-  const getCurrentWinnerStatus = () => _currentWinnerStatus;
   const getNumberOfWins = () => _numberOfWins;
   const incrementNumberOfWins = () => ++_numberOfWins;
 
@@ -22,8 +20,6 @@ const playerFactory = (name, marker, currentPlayerStatus) => {
     getMarker,
     setCurrentPlayerStatus,
     getCurrentPlayerStatus,
-    setCurrentWinnerStatus,
-    getCurrentWinnerStatus,
     getNumberOfWins,
     incrementNumberOfWins
   }
@@ -84,16 +80,6 @@ const gameController = (() => {
       player2NumberOfWinsDiv.innerHTML = `<p>${player2.getNumberOfWins()}</p>`;
     } else {
       playAgainButton.classList.add('invisible');
-
-      player1.setCurrentPlayerStatus(!player1.getCurrentWinnerStatus());
-      player2.setCurrentPlayerStatus(!player2.getCurrentWinnerStatus());
-      if (player1.getCurrentPlayerStatus) {
-        player1NameAndMarkerDiv.classList.remove('current-player');
-        player2NameAndMarkerDiv.classList.add('current-player');
-      } else {
-        player1NameAndMarkerDiv.classList.add('current-player');
-        player2NameAndMarkerDiv.classList.remove('current-player');
-      }
     }
 
     _numberOfPlays = 0;
@@ -118,12 +104,11 @@ const gameController = (() => {
       div.innerHTML = `<span>${currentPlayer.getMarker()}</span>`;
       div.classList.remove('empty');
       ++_numberOfPlays;
+      switchPlayer();
       if (hasGameFinishedByWinning()) {
         finishGame(currentPlayer);
       } else if (_numberOfPlays === 9) {
         finishGame();
-      } else {
-        switchPlayer();
       }
     }
   };
@@ -154,7 +139,6 @@ const gameController = (() => {
     let message;
     if (winningPlayer) {
       message = `${winningPlayer.getName()} has won!`;
-      winningPlayer.setCurrentWinnerStatus(true);
       winningPlayer.incrementNumberOfWins();
     } else {
       message = 'It\'s a tie!';
