@@ -58,8 +58,9 @@ const gameBoard = (() => {
 
 const gameController = (() => {
   const board = gameBoard.get();
-  let _numberOfPlays;
   const boardDiv = document.getElementById('board');
+  const divs = [...boardDiv.children];
+  let _numberOfPlays;
   document.getElementById('start').addEventListener('click', () => startGame(true));
   const player1NameAndMarkerDiv = document.getElementById('player1-name-and-marker');
   const player2NameAndMarkerDiv = document.getElementById('player2-name-and-marker');
@@ -101,28 +102,29 @@ const gameController = (() => {
   };
 
   const game = () => {
-    const divs = [...boardDiv.children];
-
     for (let id in divs) {
       const div = document.getElementById(id);
       div.classList.add('empty');
       div.innerHTML = '';
-      div.addEventListener('click', () => {
-        if (!board[id]) {
-          const currentPlayer = player1.getCurrentPlayerStatus() ? player1 : player2;
-          board[id] = currentPlayer;
-          div.innerHTML = `<span>${currentPlayer.getMarker()}</span>`;
-          div.classList.remove('empty');
-          ++_numberOfPlays;
-          if (hasGameFinishedByWinning()) {
-            finishGame(currentPlayer);
-          } else if (_numberOfPlays === 9) {
-            finishGame();
-          } else {
-            switchPlayer();
-          }
-        }
-      });
+      div.addEventListener('click', makePlay);
+    }
+  };
+
+  const makePlay = (e) => {
+    const div = e.target;
+    if (!board[div.id]) {
+      const currentPlayer = player1.getCurrentPlayerStatus() ? player1 : player2;
+      board[div.id] = currentPlayer;
+      div.innerHTML = `<span>${currentPlayer.getMarker()}</span>`;
+      div.classList.remove('empty');
+      ++_numberOfPlays;
+      if (hasGameFinishedByWinning()) {
+        finishGame(currentPlayer);
+      } else if (_numberOfPlays === 9) {
+        finishGame();
+      } else {
+        switchPlayer();
+      }
     }
   };
 
@@ -156,6 +158,11 @@ const gameController = (() => {
       winningPlayer.incrementNumberOfWins();
     } else {
       message = 'It\'s a tie!';
+    }
+    for (let id in divs) {
+      const div = document.getElementById(id);
+      div.classList.remove('empty');
+      div.removeEventListener('click', makePlay);
     }
     playAgainButton.classList.remove('invisible');
     document.getElementById('result').innerText = message;
