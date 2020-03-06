@@ -63,6 +63,8 @@ const gameController = (() => {
   document.getElementById('start').addEventListener('click', () => startGame(true));
   const player1NameAndMarkerDiv = document.getElementById('player1-name-and-marker');
   const player2NameAndMarkerDiv = document.getElementById('player2-name-and-marker');
+  const player1NumberOfWinsDiv = document.getElementById('player1-number-of-wins');
+  const player2NumberOfWinsDiv = document.getElementById('player2-number-of-wins');
   const playAgainButton = document.getElementById('result-and-play-again');
 
   const startGame = (firstGame) => {
@@ -77,6 +79,8 @@ const gameController = (() => {
       player1NameAndMarkerDiv.innerHTML = `<h3>${player1.getName()} (${player1.getMarker()})</h3>`;
       player1NameAndMarkerDiv.classList.add('current-player')
       player2NameAndMarkerDiv.innerHTML = `<h3>${player2.getName()} (${player2.getMarker()})</h3>`;
+      player1NumberOfWinsDiv.innerHTML = `<p>${player1.getNumberOfWins()}</p>`;
+      player2NumberOfWinsDiv.innerHTML = `<p>${player2.getNumberOfWins()}</p>`;
     } else {
       playAgainButton.classList.add('invisible');
 
@@ -90,8 +94,6 @@ const gameController = (() => {
         player2NameAndMarkerDiv.classList.remove('current-player');
       }
     }
-    document.getElementById('player1-number-of-wins').innerHTML = `<p>${player1.getNumberOfWins()}</p>`;
-    document.getElementById('player2-number-of-wins').innerHTML = `<p>${player2.getNumberOfWins()}</p>`;
 
     _numberOfPlays = 0;
     gameBoard.reset();
@@ -158,6 +160,8 @@ const gameController = (() => {
     playAgainButton.classList.remove('invisible');
     document.getElementById('result').innerText = message;
     document.getElementById('play-again').addEventListener('click', () => startGame(false));
+    player1NumberOfWinsDiv.innerHTML = `<p>${player1.getNumberOfWins()}</p>`;
+    player2NumberOfWinsDiv.innerHTML = `<p>${player2.getNumberOfWins()}</p>`;
   };
 
   const switchPlayer = () => {
